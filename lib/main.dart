@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/home/bloc/home_bloc.dart';
@@ -15,6 +16,12 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => HomeBloc(),
       child: MaterialApp(
+        theme:ThemeData(
+           useMaterial3: true,
+           appBarTheme: AppBarTheme(backgroundColor: Colors.lightGreen)
+
+        ),
+
        
         debugShowCheckedModeBanner: false,
         home: Home(),

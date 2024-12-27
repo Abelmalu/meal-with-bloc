@@ -1,3 +1,4 @@
+import 'package:bloc_meal/features/home/ui/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +23,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
         if (state is HomeNavigateToCartPageActionState) {
@@ -40,7 +40,25 @@ class _HomeState extends State<Home> {
           case HomeLoadingState:
             return Scaffold(body: Center(child: CircularProgressIndicator()));
           case HomeLoadedSuccessState:
-            return Scaffold(body: Center(child: CircularProgressIndicator()));
+            final successState = state as HomeLoadedSuccessState;
+            return Scaffold(
+                appBar: AppBar(title: Text('Grocery app'), actions: [
+                  IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+                  IconButton(
+                      onPressed: () {
+                        context
+                            .read<HomeBloc>()
+                            .add(HomeCartButtonNavigateEvent());
+                      },
+                      icon: Icon(Icons.shopping_bag)),
+                ]),
+                body: ListView.builder(
+                  itemCount: successState.products.length,
+                  itemBuilder: (context, index) {
+                    return ProductItem(
+                        productItem: successState.products[index]);
+                  },
+                ));
           case HomeLoadingState:
             return Scaffold(body: Center(child: CircularProgressIndicator()));
         }
