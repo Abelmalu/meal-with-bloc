@@ -28,7 +28,19 @@ class _HomeState extends State<Home> {
         if (state is HomeNavigateToCartPageActionState) {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => CartPage()));
-        } else {
+        } 
+
+        if( state is cartAddedState){
+
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text('product added to cart'),
+          ));
+
+
+        }
+        
+        
+        else {
           Text('hellow');
         }
         // TODO: implement listener
@@ -50,7 +62,7 @@ class _HomeState extends State<Home> {
                             .read<HomeBloc>()
                             .add(HomeCartButtonNavigateEvent());
                       },
-                      icon: Icon(Icons.shopping_bag)),
+                      icon: Icon(Icons.shopping_cart)),
                 ]),
                 body: ListView.builder(
                   itemCount: successState.products.length,

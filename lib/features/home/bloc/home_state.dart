@@ -18,3 +18,10 @@ class HomeLoadedSuccessState extends HomeState {
 class HomeErrorState extends HomeState {}
 
 class HomeNavigateToCartPageActionState extends HomeActionState {}
+
+
+final class cartAddedState extends HomeActionState {
+  final List<ProductDataModel> cartProducts;
+
+  cartAddedState({required this.cartProducts});
+}
