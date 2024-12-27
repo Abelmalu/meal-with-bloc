@@ -2,7 +2,7 @@ import 'package:bloc_meal/features/home/ui/product_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cart/ui/cart.dart';
+import '../../cart/ui/cart_screen.dart';
 import '../bloc/home_bloc.dart';
 
 class Home extends StatefulWidget {
@@ -28,19 +28,13 @@ class _HomeState extends State<Home> {
         if (state is HomeNavigateToCartPageActionState) {
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => CartPage()));
-        } 
+        }
 
-        if( state is cartAddedState){
-
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        if (state is cartAddedState) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text('product added to cart'),
           ));
-
-
-        }
-        
-        
-        else {
+        } else {
           Text('hellow');
         }
         // TODO: implement listener
@@ -54,23 +48,23 @@ class _HomeState extends State<Home> {
           case HomeLoadedSuccessState:
             final successState = state as HomeLoadedSuccessState;
             return Scaffold(
-                appBar: AppBar(title: Text('Grocery app'), actions: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
-                  IconButton(
-                      onPressed: () {
-                        context
-                            .read<HomeBloc>()
-                            .add(HomeCartButtonNavigateEvent());
-                      },
-                      icon: Icon(Icons.shopping_cart)),
-                ]),
-                body: ListView.builder(
-                  itemCount: successState.products.length,
-                  itemBuilder: (context, index) {
-                    return ProductItem(
-                        productItem: successState.products[index]);
-                  },
-                ));
+              appBar: AppBar(title: Text('Grocery app'), actions: [
+                IconButton(onPressed: () {}, icon: Icon(Icons.favorite)),
+                IconButton(
+                    onPressed: () {
+                      context
+                          .read<HomeBloc>()
+                          .add(HomeCartButtonNavigateEvent());
+                    },
+                    icon: Icon(Icons.shopping_cart)),
+              ]),
+              body: ListView.builder(
+                itemCount: successState.products.length,
+                itemBuilder: (context, index) {
+                  return ProductItem(productItem: successState.products[index]);
+                },
+              ),
+            );
           case HomeLoadingState:
             return Scaffold(body: Center(child: CircularProgressIndicator()));
         }
