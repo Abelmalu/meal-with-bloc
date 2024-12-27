@@ -3,15 +3,18 @@ part of 'home_bloc.dart';
 @immutable
 sealed class HomeState {}
 
-sealed class HomeActionState extends HomeState{}
+sealed class HomeActionState extends HomeState {}
 
-final class HomeInitial extends HomeState {}
+final class HomeInitialState extends HomeState {}
 
-class HomeLoadingState extends HomeState{}
+class HomeLoadingState extends HomeState {}
 
-class HomeLoadedSuccessState extends HomeState{}
+class HomeLoadedSuccessState extends HomeState {
+  final List<ProductDataModel> products;
 
-class HomeErrorState extends HomeState{}
+  HomeLoadedSuccessState({required this.products});
+}
 
-class HomeNavigateToCartPage extends HomeActionState{}
+class HomeErrorState extends HomeState {}
 
+class HomeNavigateToCartPageActionState extends HomeActionState {}

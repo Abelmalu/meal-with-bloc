@@ -4,6 +4,11 @@ part of 'home_bloc.dart';
 sealed class HomeEvent {}
 
 
+final class HomeInitialEvent extends HomeEvent{
+  
+}
+
+
 final class HomeCartButtonEvent extends HomeEvent{
 
 
